@@ -20,4 +20,14 @@ public col(String label, String type){
     this.label = label;
     this.type = type;
     this.values = new ArrayList<VALUE>();
-}}
+}
+public int getsize(){
+    return this.values.size();
+}
+public String getLabel() {
+    return label;
+}
+public String getType() {
+    return type;
+}
+}
