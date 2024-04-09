@@ -11,7 +11,7 @@ import com.opencsv.CSVReader;
 import de.vandermeer.asciitable.AsciiTable;
 import de.vandermeer.asciithemes.a7.A7_Grids;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
-public class Dataframe {
+public class Dataframe{
  
     private List<col> data;
     private ArrayList<String> labels;
@@ -79,6 +79,11 @@ protected void afficherdev(int debut, int fin) throws BadArgumentException {
     at.setTextAlignment(TextAlignment.CENTER);
     at.getContext().setGrid(A7_Grids.minusBarPlusEquals());
     System.out.println(at.render());
+}
+
+public void afficherDebut(int nbline) {
+    if(nbline < 0 || nbline > getNbligne())
+    afficherdev(nbline, nbline);
 }
 
 
