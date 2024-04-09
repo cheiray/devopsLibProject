@@ -85,6 +85,10 @@ public void afficherDebut(int nbline) {
     if(nbline < 0 || nbline > getNbligne())
     afficherdev(nbline, nbline);
 }
-
+public void afficherFin(int nbline) throws BadArgumentException {
+    if(nbline < 0 || nbline > getNbligne())
+        throw new BadArgumentException("number of lines");
+   afficherdev(getNbligne()-nbline,getNbligne());
+}
 
 }
