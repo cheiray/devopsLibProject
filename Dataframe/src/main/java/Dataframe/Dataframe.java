@@ -91,7 +91,8 @@ public void afficherFin(int nbline) throws BadArgumentException {
    afficherdev(getNbligne()-nbline,getNbligne());
 }
 
-public void afficher() throws BadArgumentException{
+
+public void afficher(){
     afficherdev(0,getNbligne());
 }
 }
