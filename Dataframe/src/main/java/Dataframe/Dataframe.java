@@ -1,6 +1,10 @@
 package Dataframe;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Map;
 
 /**
  *
@@ -29,6 +33,7 @@ public class Dataframe {
 
     public Dataframe(String nomFichier) throws FileNotFoundException, IOException{
         System.out.println("TO IMPLEMENT: This method needs to be implemented");
+        
     }
 
 
@@ -50,18 +55,26 @@ public class Dataframe {
         System.out.println("TO IMPLEMENT: This method needs to be implemented");
     }
 
+    public void display() throws BadArgumentException{
+        System.out.println("TO IMPLEMENT: This method needs to be implemented");
+    }
+
+
 
     public Dataframe selectLine(int debut ,int fin ){
         System.out.println("TO IMPLEMENT: This method needs to be implemented");
+        return null;
     }
 
     public Dataframe selectCol(ArrayList<String> l){
         System.out.println("TO IMPLEMENT: This method needs to be implemented");
+        return null;
     }
 
 
     public List<String> getligne(int index) {
         System.out.println("TO IMPLEMENT: This method needs to be implemented");
+        return null;
 
     }
 
@@ -69,6 +82,7 @@ public class Dataframe {
     public Column getcol(String label)  {
 
         System.out.println("TO IMPLEMENT: This method needs to be implemented");
+        return null;
     }
 
     public void insertligne(String[] l) {
@@ -82,20 +96,24 @@ public class Dataframe {
 
     public double max(String label) throws BadArgumentException {
         System.out.println("TO IMPLEMENT: This method needs to be implemented");
+        return -1;
     }
     
 
     public double sum(String label) throws BadArgumentException {
       System.out.println("TO IMPLEMENT: This method needs to be implemented");
+        return -1;
     }
  
     public double min(String label) throws BadArgumentException {
         System.out.println("TO IMPLEMENT: This method needs to be implemented");
+        return -1;
     }
     
     
     public double mean(String label) throws BadArgumentException {
         System.out.println("TO IMPLEMENT: This method needs to be implemented");
+        return -1;
     }
 
     public void deleteRow(int index) {
