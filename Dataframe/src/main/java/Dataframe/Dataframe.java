@@ -141,19 +141,60 @@ public class Dataframe {
     
 
     public double sum(String label) throws BadArgumentException {
-      System.out.println("TO IMPLEMENT: This method needs to be implemented");
-        return -1;
+        List<Object> column = data.get(label);
+        if (column == null || column.isEmpty()) {
+            throw new BadArgumentException("Column does not exist or is empty");
+        }
+        double sum = 0;
+        for (Object value : column) {
+            double currentValue;
+            try {
+                currentValue = Double.parseDouble(value.toString());
+            } catch (NumberFormatException e) {
+                throw new BadArgumentException("Column contains non-numeric values");
+            }
+            sum += currentValue;
+        }
+        return sum;
     }
- 
     public double min(String label) throws BadArgumentException {
-        System.out.println("TO IMPLEMENT: This method needs to be implemented");
-        return -1;
+        List<Object> column = data.get(label);
+        if (column == null || column.isEmpty()) {
+            throw new BadArgumentException("Column does not exist or is empty");
+        }
+        double min = Double.MAX_VALUE;
+        for (Object value : column) {
+            double currentValue;
+            try {
+                currentValue = Double.parseDouble(value.toString());
+            } catch (NumberFormatException e) {
+                throw new BadArgumentException("Column contains non-numeric values");
+            }
+            if (currentValue < min) {
+                min = currentValue;
+            }
+        }
+        return min;
     }
+
     
     
     public double mean(String label) throws BadArgumentException {
-        System.out.println("TO IMPLEMENT: This method needs to be implemented");
-        return -1;
+        List<Object> column = data.get(label);
+        if (column == null || column.isEmpty()) {
+            throw new BadArgumentException("Column does not exist or is empty");
+        }
+        double sum = 0;
+        for (Object value : column) {
+            double currentValue;
+            try {
+                currentValue = Double.parseDouble(value.toString());
+            } catch (NumberFormatException e) {
+                throw new BadArgumentException("Column contains non-numeric values");
+            }
+            sum += currentValue;
+        }
+        return sum / column.size();
     }
 
     public void deleteRow(int index) {
