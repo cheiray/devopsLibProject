@@ -133,10 +133,24 @@ public class Dataframe {
        System.out.println("TO IMPLEMENT: This method needs to be implemented");
     }
 
-
     public double max(String label) throws BadArgumentException {
-        System.out.println("TO IMPLEMENT: This method needs to be implemented");
-        return -1;
+        List<Object> column = data.get(label);
+        if (column == null || column.isEmpty()) {
+            throw new BadArgumentException("Column does not exist or is empty");
+        }
+        double max = Double.MIN_VALUE;
+        for (Object value : column) {
+            double currentValue;
+            try {
+                currentValue = Double.parseDouble(value.toString());
+            } catch (NumberFormatException e) {
+                throw new BadArgumentException("Column contains non-numeric values");
+            }
+            if (currentValue > max) {
+                max = currentValue;
+            }
+        }
+        return max;
     }
     
 
