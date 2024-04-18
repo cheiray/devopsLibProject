@@ -1,39 +1,75 @@
 package Dataframe;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.Map;
+import java.util.*;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+
 
 /**
  *
- * @author Rayen CHEIKH M'HAMED, L'HADI YOUSFI, Benjamin
+ * @author Rayen CHEIKH M'HAMED, L'HADI YOUSFI, Benjamin (???)
  */
 
 public class Dataframe {
  
-    private ArrayList<String> labels;
-    private List<Column> data;
-    private int numberOfLines;
+    private Map<String, List<Object>> data;
+    private List<String> labels;
+    private int numberOfRows;
 
     // Empty Default constructor
     public Dataframe() {
-        
-        labels=new ArrayList<String>();
-        data =new ArrayList<Column>();
-        numberOfLines=0;
-
+        data = new LinkedHashMap<>();
+        labels = new ArrayList<>();
+        numberOfRows = 0;
     }
 
     
-    public Dataframe( Map<String, List<?>> map) throws BadArgumentException{
-        System.out.println("TO IMPLEMENT: This method needs to be implemented");
+    public Dataframe(Map<String, List<?>> map) throws BadArgumentException {
+       
+
+        int size = -1;
+        for (List<?> list : map.values()) {
+            if (size == -1) {
+                size = list.size();
+            } else if (list.size() != size) {
+                throw new BadArgumentException("Columns have different sizes");
+            }
+        }
+
+        data = new LinkedHashMap<>();
+        labels = new ArrayList<>();
+        for (Map.Entry<String, List<?>> entry : map.entrySet()) {
+            String colName = entry.getKey();
+            List<?> colData = entry.getValue();
+            data.put(colName, new ArrayList<>(colData));
+            labels.add(colName);
+        }
+        numberOfRows = size;
     }
 
-    public Dataframe(String nomFichier) throws FileNotFoundException, IOException{
-        System.out.println("TO IMPLEMENT: This method needs to be implemented");
-        
+    public Dataframe(String nomFichier) throws IOException {
+        data = new LinkedHashMap<>();
+        labels = new ArrayList<>();
+        FileReader fileReader = new FileReader(nomFichier);
+        CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fileReader);
+
+        for (String label : csvParser.getHeaderNames()) {
+            data.put(label.trim(), new ArrayList<>());
+            labels.add(label.trim());
+        }
+
+        for (CSVRecord record : csvParser) {
+            for (String label : csvParser.getHeaderNames()) {
+                data.get(label.trim()).add(record.get(label));
+            }
+        }
+        long numRecords = csvParser.getRecordNumber();
+        numberOfRows = (int)numRecords;
     }
 
 
