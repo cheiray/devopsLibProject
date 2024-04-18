@@ -122,18 +122,20 @@ public class Dataframe {
     }
 
 
-    public Column getcol(String label)  {
-
-        System.out.println("TO IMPLEMENT: This method needs to be implemented");
-        return null;
+    public List<Object> getcol(String label) {
+        return data.get(label);
     }
 
     public void insertligne(String[] l) {
         System.out.println("TO IMPLEMENT: This method needs to be implemented");       
     }
 
-    public void insertCol(Column c) {
-       System.out.println("TO IMPLEMENT: This method needs to be implemented");
+    public void insertCol(String label, List<?> colData) {
+        data.put(label, new ArrayList<>(colData));
+        labels.add(label);
+        if (colData.size() > numberOfRows) {
+            numberOfRows = colData.size();
+        }
     }
 
     public double max(String label) throws BadArgumentException {
