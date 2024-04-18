@@ -81,6 +81,10 @@ public class Dataframe {
         return numberOfRows;
     }
 
+    public List<String> getLabels() {
+        return labels;
+    }
+
 
     public void displayFromTo(int start, int end) throws BadArgumentException {
         if (start < 0 || start > numberOfRows || end < 0 || end > numberOfRows || start > end) {

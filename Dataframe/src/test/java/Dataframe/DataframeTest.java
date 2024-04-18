@@ -103,19 +103,25 @@ public class DataframeTest {
     
     @Test
     public void testGetCol() {
-        Column c = employees.getcol("Employee Name");
-       
-        assertEquals(c.getLabel(),"Employee Name");
-       
-    }
-    
-    public void testinsertCol()  {
-        Column c = new Column("testCol1","Integer",  Arrays.asList(1, 2));
+        Dataframe df = new Dataframe();
+        df.insertCol("Employee Name", Arrays.asList("Alice", "Bob", "Charlie"));
 
-        
-        Df.insertCol(c);
-        assertEquals(c, Df.getcol("testCol1"));
-        
+        List<Object> columnData = df.getcol("Employee Name");
+
+        assertEquals("Employee Name", df.getLabels().get(0));
+        assertEquals(Arrays.asList("Alice", "Bob", "Charlie"), columnData);
+    }
+
+    @Test
+    public void testInsertCol() {
+        Dataframe df = new Dataframe();
+        List<Object> testData = Arrays.asList(1, 2, 3);
+        df.insertCol("testCol1", testData);
+
+        List<Object> columnData = df.getcol("testCol1");
+
+        assertEquals("testCol1", df.getLabels().get(0));
+        assertEquals(testData, columnData);
     }
 
     @Test
@@ -124,7 +130,7 @@ public class DataframeTest {
     }
    
     @Test
-    public void testSelectLines()  {
+    public void testSelectLines() throws BadArgumentException {
         Dataframe d = employees.selectLine(0, 2);
         assertEquals(3, d.getDataFrameSize());
     }
@@ -183,5 +189,30 @@ public class DataframeTest {
        
         assertEquals(73333.33, employees.mean("Salary"), 0.01);
     }
+    
+    @Test (expected = BadArgumentException.class)
+    public void testMaxWithNonNumericColumn() throws Exception {
+       
+        employees.max("Employee Name");
+    }
+    
+    @Test (expected = BadArgumentException.class)
+    public void testSumWithNonNumericColumn() throws Exception {
+      
+        employees.sum("Employee Name");
+    }
+    
+    @Test (expected = BadArgumentException.class)
+    public void testMinWithNonNumericColumn() throws Exception {
+     
+        employees.min("Employee Name");
+    }
+    
+    @Test (expected = BadArgumentException.class)
+    public void testMeanWithNonNumericColumn() throws Exception {
+      
+        employees.mean("Employee Name");
+    }   
 
+    
 }
