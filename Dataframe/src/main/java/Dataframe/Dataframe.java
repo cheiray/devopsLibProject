@@ -30,11 +30,15 @@ public class Dataframe {
 
     
     public Dataframe(Map<String, List<?>> map) throws BadArgumentException {
-       
+        if (map == null || map.isEmpty()) {
+            throw new BadArgumentException("Data map is null or empty");
+        }
 
         int size = -1;
         for (List<?> list : map.values()) {
-            if (size == -1) {
+            if (list == null) {
+                throw new BadArgumentException("The dataframe contains a null list");
+            } else if (size == -1) {
                 size = list.size();
             } else if (list.size() != size) {
                 throw new BadArgumentException("Columns have different sizes");
@@ -74,7 +78,7 @@ public class Dataframe {
 
 
     public int getDataFrameSize() {
-        return numberOfLines;
+        return numberOfRows;
     }
 
 
