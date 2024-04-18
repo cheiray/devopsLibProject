@@ -108,21 +108,33 @@ public class Dataframe {
 
 
 
-    public Dataframe selectLine(int debut ,int fin ){
-        System.out.println("TO IMPLEMENT: This method needs to be implemented");
-        return null;
+    public Dataframe selectLine(int start, int end) throws BadArgumentException {
+        if (start < 0 || start >= numberOfRows || end < 0 || end >= numberOfRows || start > end) {
+            throw new BadArgumentException("Invalid start or end index");
+        }
+
+        Dataframe dataframe = new Dataframe();
+        for (String label : labels) {
+            dataframe.insertCol(label, data.get(label).subList(start, end + 1));
+        }
+        return dataframe;
     }
 
-    public Dataframe selectCol(ArrayList<String> l){
-        System.out.println("TO IMPLEMENT: This method needs to be implemented");
-        return null;
+    public Dataframe selectCol(ArrayList<String> selectedLabels) {
+        Dataframe dataframe = new Dataframe();
+        for (String label : selectedLabels) {
+            dataframe.insertCol(label, data.get(label));
+        }
+        return dataframe;
     }
 
 
-    public List<String> getligne(int index) {
-        System.out.println("TO IMPLEMENT: This method needs to be implemented");
-        return null;
-
+    public List<Object> getLine(int index) {
+        List<Object> line = new ArrayList<>();
+        for (String label : labels) {
+            line.add(data.get(label).get(index));
+        }
+        return line;
     }
 
 
@@ -130,8 +142,14 @@ public class Dataframe {
         return data.get(label);
     }
 
-    public void insertligne(String[] l) {
-        System.out.println("TO IMPLEMENT: This method needs to be implemented");       
+    public void insertLine(List<Object> line) throws BadArgumentException {
+        if (line.size() != labels.size()) {
+            throw new BadArgumentException("Line size does not match number of columns");
+        }
+        for (int i = 0; i < labels.size(); i++) {
+            data.get(labels.get(i)).add(line.get(i));
+        }
+        numberOfRows++;
     }
 
     public void insertCol(String label, List<?> colData) {
@@ -221,11 +239,17 @@ public class Dataframe {
     }
 
     public void deleteRow(int index) {
-        System.out.println("TO IMPLEMENT: This method needs to be implemented");
+        for (List<Object> colData : data.values()) {
+            colData.remove(index);
+        }
+        numberOfRows--;
     }
 
     public void deleteColumn(String label) {
-        System.out.println("TO IMPLEMENT: This method needs to be implemented");
+        if (data.containsKey(label)) {
+            data.remove(label);
+            labels.remove(label);
+        }
     }
 
 }
