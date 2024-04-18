@@ -82,21 +82,24 @@ public class Dataframe {
     }
 
 
-    protected void displayFromTo(int debut, int fin) throws BadArgumentException{
-        System.out.println("TO IMPLEMENT: This method needs to be implemented");
-        
+    public void displayFromTo(int start, int end) throws BadArgumentException {
+        if (start < 0 || start > numberOfRows || end < 0 || end > numberOfRows || start > end) {
+            throw new BadArgumentException("Invalid start or end index");
+        }
+
+        AsciiTableRenderer.render(data, labels, start, end);
     }
 
-    public void displayFromBegginingTo(int nbline) throws BadArgumentException {
-        System.out.println("TO IMPLEMENT: This method needs to be implemented");
+    public void displayFromBegginingTo(int numberOfLines) throws BadArgumentException {
+        displayFromTo(0, numberOfLines);
     }
 
-    public void displayFromEndTo(int nbline) throws BadArgumentException {
-        System.out.println("TO IMPLEMENT: This method needs to be implemented");
+    public void displayFromEndTo(int numberOfLines) throws BadArgumentException {
+        displayFromTo(getDataFrameSize() - numberOfLines, getDataFrameSize());
     }
 
-    public void display() throws BadArgumentException{
-        System.out.println("TO IMPLEMENT: This method needs to be implemented");
+    public void display() throws BadArgumentException {
+        displayFromTo(0, getDataFrameSize());
     }
 
 
