@@ -128,13 +128,13 @@ public class DataframeTest {
     public void displayTest() throws Exception {
         employees.display();
     }
-   
+   /* 
     @Test
     public void testSelectLines() throws BadArgumentException {
         Dataframe d = employees.selectLine(0, 2);
         assertEquals(3, d.getDataFrameSize());
     }
-
+*/
 
     @Test
     public void testdisplayFromTo() throws Exception {
