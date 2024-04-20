@@ -1,11 +1,15 @@
 # devopsLibProject
 
-## Sripts
-### Ajout droit sur les scripts
-    chmod u+x compile.sh
-    chmod u+x test.sh 
-### Compilation
-    ./compile
+## Compilation
+    cd Dataframe
+    mvn clean compile
 
-### Test
-    ./test
+## Test
+    cd Dataframe
+    mvn clean test
+
+## Code coverage
+    cd Dataframe
+    mvn clean clover:setup test clover:aggregate clover:clover
+
+    Link of the report in Dataframe/target/site/clover/index.html 
