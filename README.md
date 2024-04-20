@@ -1,4 +1,5 @@
 # devopsLibProject
+[![codecov](https://codecov.io/gh/cheiray/devopsLibProject/branch/main/graph/badge.svg)](https://codecov.io/gh/cheiray/devopsLibProject)
 
 ## Compilation
     cd Dataframe
